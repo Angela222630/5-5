@@ -21,11 +21,14 @@ let stream = null;
 async function init() {
   try {
     statusText.textContent = '模型載入中…';
+    if (typeof tmImage === 'undefined') {
+      throw new Error('Teachable Machine library 無法載入');
+    }
     model = await tmImage.load(MODEL_URL, METADATA_URL);
     statusText.textContent = '模型已載入，請啟動相機或上傳照片。';
   } catch (error) {
     console.error(error);
-    statusText.textContent = '模型載入失敗，請檢查 models 資料夾與網路環境。';
+    statusText.textContent = `模型載入失敗：${error.message}。請檢查 models 資料夾與網路環境。`;
   }
 }
 
