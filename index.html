@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>垃圾分類辨識</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <h1>垃圾分類辨識</h1>
+        <p>使用手機相機拍照，即時辨識鞋子 / 塑膠 / 衣服</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="card camera-card">
+        <div class="camera-frame">
+          <video id="camera-preview" autoplay playsinline muted></video>
+          <canvas id="capture-canvas" width="224" height="224" hidden></canvas>
+          <div class="camera-overlay">
+            <div class="camera-hint">將垃圾置於畫面中央，再拍照辨識</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="start-camera" type="button">啟動相機</button>
+          <button id="capture-button" type="button" disabled>拍照辨識</button>
+        </div>
+
+        <div class="upload-group">
+          <label class="upload-label" for="file-input">或上傳照片</label>
+          <input id="file-input" type="file" accept="image/*">
+        </div>
+      </section>
+
+      <section class="card result-card">
+        <h2>辨識結果</h2>
+        <div id="result-text" class="result-text">請先啟動相機並拍照，或上傳照片。</div>
+        <ul id="prediction-list" class="prediction-list"></ul>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <div id="status" class="status">模型載入中…</div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.7.4/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.4-alpha2/dist/teachablemachine-image.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
